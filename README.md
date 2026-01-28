@@ -21,10 +21,10 @@ cd QDALocal
 
 # Create a virtual environment (recommended)
 python -m venv qda_env
-source qda_env/bin/activate  # On Windows: qda_env\Scripts\activate
+source qda_env/bin/activate
 
 # Install dependencies
-pip3 install -r requirements.txt
+uv install -r requirements.txt
 ```
 
 ### Step 2: Prepare Your Data
@@ -77,7 +77,7 @@ jupyter lab
 #### Option 1: Basic Installation (Recommended - No Build Issues)
 ```bash
 # Use the basic requirements file (excludes Top2Vec which has build dependencies)
-pip install -r requirements_basic.txt
+uv install -r requirements_basic.txt
 
 # This installs BERTopic and all other dependencies without build issues
 ```
@@ -85,7 +85,7 @@ pip install -r requirements_basic.txt
 #### Option 2: Full Installation (May Have Build Issues)
 ```bash
 # Try full installation (includes Top2Vec)
-pip install -r requirements.txt
+uv install -r requirements.txt
 
 # If this fails with gensim build errors, use Option 1 above
 ```
@@ -101,7 +101,7 @@ source qda_env/bin/activate  # macOS/Linux
 qda_env\Scripts\activate     # Windows
 
 # Install basic packages
-pip install -r requirements_basic.txt
+uv install -r requirements_basic.txt
 ```
 
 #### Option 4: Conda Environment
@@ -112,8 +112,8 @@ conda activate qda
 
 # Install packages (conda handles C extensions better)
 conda install pandas openpyxl scikit-learn matplotlib seaborn plotly jupyter
-pip install bertopic sentence-transformers umap-learn hdbscan
-# Optional: pip install top2vec (may still have build issues)
+uv install bertopic sentence-transformers umap-learn hdbscan
+# Optional: uv install top2vec (may still have build issues)
 ```
 
 ### Data Preparation
@@ -157,7 +157,7 @@ The notebook automatically detects these column names:
 1. **Cell 1-2**: Install and import libraries
    ```python
    # Run this if packages aren't installed
-   !pip install -r ../requirements.txt
+   !uv install -r ../requirements.txt
    ```
 
 2. **Cell 3**: Load Excel workbook
@@ -239,26 +239,15 @@ excel_file = '../data/raw/your_workbook.xlsx'
 ```
 
 **"No texts extracted"**
-- Check column names in your Excel file
-- Add your column names to the `text_columns` list:
 ```python
 text_columns = ['text', 'response', 'comment', 'your_column_name']
 ```
 
 **Memory errors**
-- Reduce `min_topic_size` in BERTopic (default: 5)
-- Switch to Top2Vec for large datasets
-- Process data in smaller batches
 
 **Poor topic quality**
-- Clean your text data (remove noise, standardize)
-- Try different model settings
-- Increase `min_topic_size` for fewer, more focused topics
 
 **Visualization not showing**
-- Ensure you're running in Jupyter Notebook/Lab
-- Check that plotly is installed: `pip install plotly`
-- Try running in a browser
 
 #### Performance Optimization
 
@@ -324,7 +313,7 @@ all_texts = [preprocess_text(text) for text in all_texts]
 #### Google Colab
 1. Upload notebook to Google Drive
 2. Open with Colab
-3. Install dependencies: `!pip install -r requirements.txt`
+3. Install dependencies: `!uv install -r requirements.txt`
 4. Mount Drive for data access
 
 #### Local Server
