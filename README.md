@@ -20,11 +20,20 @@ cd /Users/scott.queen/Projects
 cd QDALocal
 
 # Create a virtual environment (recommended)
-python -m venv qda_env
-source qda_env/bin/activate
+# Option A: Create and activate the venv (explicit activation)
+uv sync
 
-# Install dependencies
+# Install dependencies inside the activated venv
 uv install -r requirements.txt
+
+# Option B: Let `uv` manage and run commands without activating
+# Create the venv (once)
+uv venv qda_env
+
+# Install dependencies and run commands inside the project environment
+# (no manual activation required)
+uv run pip install -r requirements.txt
+uv run jupyter lab
 ```
 
 ### Step 2: Prepare Your Data
@@ -56,7 +65,7 @@ jupyter lab
 3. **Run all cells** in order (Shift+Enter or click the ▶️ button)
 4. **Choose your model** in Step 3:
    ```python
-   model_choice = 'bertopic'  # or 'top2vec'
+   model_choice = 'bertopic'
    ```
 
 ### Step 5: Review Results
