@@ -1,0 +1,229 @@
+# Data files (uncomment if you want to commit sample data)
+data/raw/*.xlsx
+data/raw/*.xls
+data/processed/*.csv
+data/results/*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+Open `notebooks/qualitative_analysis.ipynb` and run the cells in order.
+
+## Project Structure
+
+```
+QDALocal/
+├── README.md                          # This file
+├── requirements.txt                   # Python dependencies
+├── notebooks/
+│   └── qualitative_analysis.ipynb    # Main analysis notebook
+├── data/
+│   ├── raw/                          # Place your Excel files here
+│   ├── processed/                    # Extracted texts (auto-generated)
+│   └── results/                      # Analysis outputs (auto-generated)
+└── .gitignore                        # Git ignore rules
+```
+
+## Model Options
+
+### BERTopic (Recommended)
+- **Pros**: Hierarchical topics, rich visualizations, probability scores
+- **Best for**: Most qualitative analysis scenarios
+- **Settings**: Auto-detects optimal number of topics
+
+### Top2Vec
+- **Pros**: Fast processing, good for large datasets
+- **Best for**: Quick analysis or when BERTopic is too slow
+- **Settings**: Uses document embeddings for topic discovery
+
+## Output Files
+
+The notebook generates several output files in `data/results/`:
+
+- `extracted_themes_[model].csv`: Summary of discovered topics
+- `detailed_themes_[model].csv`: Detailed topic information with word scores
+- `text_topic_assignments_[model].csv`: Individual text assignments to topics
+
+## QDA Tool Integration
+
+### Taguette
+1. Import the CSV files as documents
+2. Use the theme information to create initial tags
+3. Manually validate and refine tags
+
+### QualCoder
+1. Import texts from the processed CSV
+2. Use the topic assignments as initial coding
+3. Review and adjust codes as needed
+
+### NVivo/ATLAS.ti
+1. Import the CSV files
+2. Create nodes based on the discovered topics
+3. Use the detailed theme information for code descriptions
+
+## Advanced Usage
+
+### Large Datasets
+For datasets with >10,000 texts:
+- Use Top2Vec instead of BERTopic for faster processing
+- Consider running on Databricks Community Edition (free)
+- Increase `min_topic_size` in BERTopic to reduce memory usage
+
+### Custom Preprocessing
+Modify the text extraction cell to add:
+- Text cleaning (remove special characters, normalize case)
+- Stop word removal
+- Stemming or lemmatization
+
+### Model Tuning
+Adjust BERTopic parameters:
+```python
+topic_model = BERTopic(
+    min_topic_size=10,      # Minimum texts per topic
+    nr_topics="auto",       # Or set specific number
+    language="english"      # Change for other languages
+)
+```
+
+## Self-Hosting Options
+
+### Docker
+```bash
+# Run Jupyter in Docker
+docker run -p 8888:8888 -v $(pwd):/home/jovyan/work jupyter/scipy-notebook
+```
+
+### Databricks Community Edition
+1. Sign up at [community.databricks.com](https://community.databricks.com)
+2. Upload your notebook
+3. Run with scalable clusters for large datasets
+
+## Troubleshooting
+
+### Common Issues
+
+**"File not found" error**
+- Ensure your Excel file is in `data/raw/`
+- Check the file path in the notebook
+
+**"No texts extracted"**
+- Verify column names match the `text_columns` list
+- Check for empty cells or non-text data
+
+**Memory errors**
+- Reduce `min_topic_size` in BERTopic
+- Switch to Top2Vec
+- Process data in batches
+
+**Poor topic quality**
+- Preprocess text (remove noise, standardize)
+- Adjust model parameters
+- Try the other model
+
+### Performance Tips
+
+- **CPU**: Use Top2Vec for faster processing
+- **GPU**: BERTopic supports GPU acceleration if available
+- **Memory**: Process large files in chunks
+- **Storage**: Clean up intermediate files regularly
+
+## Dependencies
+
+- `pandas`: Data manipulation
+- `openpyxl`: Excel file handling
+- `bertopic`: Topic modeling (recommended)
+- `top2vec`: Alternative topic modeling
+- `jupyter`: Notebook interface
+- `matplotlib`/`seaborn`/`plotly`: Visualizations
+- `scikit-learn`: Machine learning utilities
+- `sentence-transformers`: Text embeddings
+- `umap-learn`/`hdbscan`: Dimensionality reduction and clustering
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is open source. Please cite appropriately if used in research.
+
+## Citation
+
+If you use this notebook in your research, please consider citing:
+
+```
+AI-Enhanced Qualitative Data Analysis Notebook
+Preprocessing qualitative data with BERTopic/Top2Vec for QDA validation
+```
+
+## Support
+
+For issues or questions:
+1. Check the troubleshooting section above
+2. Review the notebook comments for parameter explanations
+3. Test with sample data first
+
+---
+
+**Last updated**: January 28, 2026</content>
+<parameter name="filePath">/Users/scott.queen/Projects/QDALocal/README.md
