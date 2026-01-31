@@ -17,23 +17,23 @@ cd /Users/scott.queen/Projects
 # (Assuming you have it locally already)
 
 # Navigate to the project
-cd QDALocal
+cd qda-bertopic
 
 # Create a virtual environment (recommended)
 # Option A: Create and activate the venv (explicit activation)
 uv sync
 
-# Install dependencies inside the activated venv
-uv install -r requirements.txt
+# # Install dependencies inside the activated venv
+# uv install -r requirements.txt
 
-# Option B: Let `uv` manage and run commands without activating
-# Create the venv (once)
-uv venv qda_env
+# # Option B: Let `uv` manage and run commands without activating
+# # Create the venv (once)
+# uv venv qda_env
 
-# Install dependencies and run commands inside the project environment
-# (no manual activation required)
-uv run pip install -r requirements.txt
-uv run jupyter lab
+# # Install dependencies and run commands inside the project environment
+# # (no manual activation required)
+# uv run pip install -r requirements.txt
+# uv run jupyter lab
 ```
 
 ### Step 2: Prepare Your Data
